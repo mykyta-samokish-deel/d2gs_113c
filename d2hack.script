@@ -1,0 +1,25 @@
+#put this script together with the loader, and the
+#loader will read it automatically at startup.
+
+#Any line begin with '#' are ignored
+#all digits here should be hex
+#use tab or space to separate two items
+
+#Format:
+#Module Name	Offset(RVA)	Source Data(for check)		Destnation Data(Change to)
+#Offset Format: 	RVA[:Offset, Pattern]
+#You can use pattern searching to get the RVA result now
+
+#Unicode CHARNAME Support
+D2Launch.dll 0X169AD	101CA56F	D01EA56F 1 #6FA569AD,(6FA40000), When create a new char, remove the charname check.
+D2Launch.dll 0X1A03D	34C0A56F	3CC0A56F 1 #6FA5A03D,(6FA40000), When login into game(0x68 packet), use unicode2Win replace Unicode::toUtf
+
+D2Client.dll 0XBB75F	FF15BCEAB76F  909090909090 1 #6FB6B75F nop replace call    ds:?unicodenwidth@Unicode@@SIIPBDH@Z, this caculate the player's name length in Party window
+D2Client.dll 0XBB768	83FE0B76  83FE1076 1 #6FB6B768 cmp     esi, 10h replace cmp     esi, 0Bh, the enlarge the player's name in Party window
+D2Client.dll 0XBB79F	C0EAB76F  9CEAB76F 1 #6FB6B79F win2Unicode replace Unicode::toUnicode, this show the player's name in Party window
+
+D2Client.dll 0XBB06A	C0EAB76F  9CEAB76F 1 #6FB6B06A win2Unicode replace Unicode::toUnicode, Show other player's name in Party window
+
+D2Client.dll 0X503C7	C0EAB76F  9CEAB76F 1 #6FB003C7 win2Unicode replace Unicode::toUnicode, Show other player's name in automap
+D2Client.dll 0X6B0AA	C0EAB76F  9CEAB76F 1 #6FB1B0AA win2Unicode replace Unicode::toUnicode, Show other player's name under player icon
+

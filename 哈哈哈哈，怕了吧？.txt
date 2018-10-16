@@ -1,0 +1,84 @@
+真正的D2GS 1.13，绝非1.10MOD服务器！！
+
+相对于1.10而言，只修正了d2server.dll文件，其他不用动～
+安装方法同1.10。。。
+
+只是需要把所有DD拷贝到你的d2目录下（必须是纯1.13 PTR版本的D2！！），注意还有一个d2gs.script文件！！
+
+需要安装PVPGN，如果不懂如何安装，请上网搜索！
+
+具备功能：
+1、正常游戏功能
+2、支持DiabloClone
+3、支持UberQuest
+4、支持USC\ULC\UGC交易窗口交易（1.13版本没有测试，没发现相应的代码 :( ）
+5、修正遗忘沙漠小站bug
+6、去掉ULC火风暴FWQ端计算
+7、可配置是否显示“XX颗乔丹之石卖给商人”的消息: ShowSOJMessage（需要设置d2server.ini）
+8、修正双光环Bug PET的问题
+9、修正了回城导致游戏崩溃的问题
+10、修正了在D2C下利用Hack创建DRU和ASN的Bug
+11、修正了组队时经验值计算错误。现在8pp组队K 非资料片Diablo以及K巴尔第二小队，都不需要离队了（需要设置d2server.ini）
+12、ACT2雇佣兵、ACT5雇佣兵、NEC的铁魔、石魔中了IM后，会自动停止攻击怪物，直到诅咒消失或者被别的诅咒取代（需要设置d2server.ini）
+13、支持Unicode的角色名字，例如汉字角色名字。请参考UnicodeCharName目录进行设置。
+14、支持房间DC模式，仅仅在sell key的房间出DC，其他房间不出。详细参考d2server.ini中的DcItemRate设置。
+15、支持Warden，可以检测到玩家是否使用了d2jsp等Hack程序，并自动将玩家踢出游戏。
+16、支持多人游戏下服务器端TC NoDrop浮点运算的预先计算，可以减轻服务器的负担。
+17、可以设置是否禁止无形防具公式打孔的BUG。
+18、可以设置是否禁止BugMF各个关底的BOSS。
+;
+;EnableMeleeHireableAI：当设置为1的时候，将修改ACT2和ACT5雇佣兵的AI设置，当中了IM（钢铁处女）诅咒之后，停止攻击，直到诅咒消失或者被别的诅咒取代（嘿嘿，再也不怕ACT4了）
+;EnableNeroPetAI：当设置为1的时候，将修改Nec召唤的铁魔、石魔的AI设置，当中了IM（钢铁处女）诅咒之后，停止攻击，直到诅咒消失或者被别的诅咒取代（骄傲铁魔的救星！）
+;EnableExpGlitchFix：当设置为1的时候，将修改组队下经验值分配算法，按照官方公布的正确算法执行。（程序实现的算法有Bug）
+;DisableUberUp：当设置为1的时候，在3BOSS场地所有的召唤出来的小怪将不再拥有经验值。（防止Uber快速升级）
+;EnableUnicodeCharName：当设置为1的时候，服务器将允许使用Unicode的角色名字，例如汉字的角色名字。注意，需要修改过的D2CS支持！请参考UnicodeCharName目录下面的说明！
+;EnableWarden：当设置为1的时候，将启动Warden模块，可以检测到客户端是否运行了一些Hack程序，例如d2jsp等，并自动将玩家踢出游戏！
+;EnablePreCalculateTCNoDropTbl：当设置为1的时候，将预先计算怪物死的时候多人NoDrop的浮点计算，有利于提高服务器的性能
+;EnableEthSocketBugFix：当设置为1的时候，禁止无形防具公式打孔额外50%防御值奖励
+;DisableBugMF：当设置为1的时候，禁止BugMF各个关底的BOSS，安姐、督瑞尔、老墨、Diablo和巴尔
+;DisableDCSpawnInSomeArea: 当设置为1的时候，禁止在“混沌避难所”、“亚瑞特山脉之巅峰”以及最后几个超级BOSS处产生DiabloClone。
+
+[NewFeatures]
+EnableMeleeHireableAI=1
+EnableNeroPetAI=1
+EnableExpGlitchFix=1
+DisableUberUp=1
+EnableUnicodeCharName=1
+EnableWarden=1
+EnablePreCalculateTCNoDropTbl=1
+EnableEthSocketBugFix=0
+DisableBugMF=0
+DisableDCSpawnInSomeArea=1
+
+
+
+;UberQuest设置
+;SpawnProbability：当BOSS施展技能时，有多大概率进行召唤，0~100之间的整数，例如30，表示30%的概率
+;MaxSpawnNum： 在一场游戏中，最大施展召唤的次数
+;SpawnInterval：两次召唤之间的最小时间间隔
+;ActivArea：多远距离可以开始施展召唤
+;StallTime：施展召唤之后，BOSS停顿时间
+;SpawnMonsters：BOSS施展召唤时，随机召唤的怪物类型（hcidx），必须是0~733之间的整数，最多10种怪物类型，每次召唤1个。
+
+[UberMephisto]
+SpawnProbability=30
+MaxSpawnNum=50
+SpawnInterval=10
+ActivArea=40
+StallTime=10
+SpawnMonsters=725,726,727,728,729,730
+
+[UberDiablo]
+SpawnProbability=30
+MaxSpawnNum=50
+SpawnInterval=10
+ActivArea=40
+StallTime=10
+SpawnMonsters=712,731,732
+
+
+已知问题：
+
+还未测试功能：
+
+未有功能：

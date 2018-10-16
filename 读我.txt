@@ -1,0 +1,44 @@
+1.13 PTR 因为没有D2loader，所以暂时不支持汉字角色名字！无法输入汉字！
+
+如何设置以使得D2支持汉字的角色名字？
+
+1、客户端设置。
+   a、需要安装完整的简体中文字库文件。启动游戏的时候使用-direct -txt开关。
+   b、使用修改版本的d2hackmap以支持最新的汉字名字输入。
+      如果没有最新的d2hackmap，请将d2hack.script文件复制到你的D2安装目录下。此d2hack.script将让你的客户端可以在创建角色的时候输入汉字，另在游戏中，将正确显示汉字的角色名字。
+      如果你已经拥有最新的d2hackmap，则不需要这个d2hack.script文件。
+
+2、服务器端设置。
+  a、修改D2CS，支持汉字角色名字。需要修改D2CS的d2charfile.c中的d2char_check_charname函数，使得汉字名字可以顺利通过检查。也可以用本目录下带的编译好的D2CS文件。
+  b、使用build 35之后的d2gs，并在d2server.ini中设置EnableUnicodeCharName=1。
+
+
+
+附：
+D2CS
+d2charfile.c
+
+int InvalidCharName(char thechar)
+{
+	// \/:*?"<>|
+	if (thechar == '\\' || thechar == '/' || thechar == ':' || thechar == '*' || thechar == '?' || thechar == '"' || thechar == '<' || thechar == '>' || thechar == '|')
+		return 1;
+	return 0;
+}
+
+extern int d2char_check_charname(char const * name)
+{
+	unsigned int	i;
+	unsigned char	ch;
+	if (!name) return -1;
+	if (InvalidCharName((int)name[0])) return -1;
+	if (name[0] == '.') return -1;
+	for (i=1; i<=MAX_CHARNAME_LEN; i++) {
+		ch=name[i];
+		if (ch=='\0') break;
+		if (!InvalidCharName(ch)) continue;
+		return -1;
+	}
+	if (i >= MIN_NAME_LEN || i<= MAX_CHARNAME_LEN) return 0;
+	return -1;
+}
